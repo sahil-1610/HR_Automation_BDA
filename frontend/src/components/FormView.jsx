@@ -13,7 +13,7 @@ const FormView = ({ showResponses }) => {
       try {
         const [formData, responsesData] = await Promise.all([
           getForm(formId),
-          showResponses ? getFormResponses(formId) : Promise.resolve([])
+          showResponses ? getFormResponses(formId) : Promise.resolve([]),
         ]);
         setForm(formData);
         setResponses(responsesData);
@@ -27,18 +27,18 @@ const FormView = ({ showResponses }) => {
 
   const renderField = (field) => {
     switch (field.type) {
-      case 'text':
-      case 'email':
-      case 'number':
+      case "text":
+      case "email":
+      case "number":
         return (
           <input
             type={field.type}
             className="shadow border rounded w-full py-2 px-3"
-            placeholder={field.placeholder || ''}
+            placeholder={field.placeholder || ""}
             disabled
           />
         );
-      case 'date':
+      case "date":
         return (
           <input
             type="date"
@@ -46,7 +46,7 @@ const FormView = ({ showResponses }) => {
             disabled
           />
         );
-      case 'select':
+      case "select":
         return (
           <select className="shadow border rounded w-full py-2 px-3" disabled>
             <option value="">Select an option</option>
@@ -55,7 +55,7 @@ const FormView = ({ showResponses }) => {
             ))}
           </select>
         );
-      case 'radio':
+      case "radio":
         return (
           <div className="space-y-2">
             {field.options?.map((opt, idx) => (
@@ -66,7 +66,7 @@ const FormView = ({ showResponses }) => {
             ))}
           </div>
         );
-      case 'checkbox':
+      case "checkbox":
         return (
           <div className="space-y-2">
             {field.options?.map((opt, idx) => (
@@ -77,8 +77,8 @@ const FormView = ({ showResponses }) => {
             ))}
           </div>
         );
-      case 'media':
-        return field.mediaUr ;
+      case "media":
+        return field.mediaUr;
       default:
         return null;
     }
@@ -86,24 +86,33 @@ const FormView = ({ showResponses }) => {
 
   const renderResponses = () => {
     // Debug logs
-    console.log('Responses state:', responses);
-    
+    console.log("Responses state:", responses);
+
     // Check if responses is empty or undefined
-    if (!responses || !responses.totalResponses || responses.totalResponses === 0) {
+    if (
+      !responses ||
+      !responses.totalResponses ||
+      responses.totalResponses === 0
+    ) {
       return <p className="text-gray-500 italic">No responses yet</p>;
     }
 
     // Map through the responses array
     return responses.responses.map((response, idx) => (
-      <div key={response._id || idx} className="border p-4 rounded mb-4 bg-gray-50">
+      <div
+        key={response._id || idx}
+        className="border p-4 rounded mb-4 bg-gray-50"
+      >
         <h3 className="font-bold mb-2">Response #{idx + 1}</h3>
         {response.responses.map((fieldResponse, fidx) => (
           <div key={`${response._id}-${fidx}`} className="mb-2">
             <p className="font-medium">{fieldResponse.label}:</p>
             <p className="ml-4">
-              {fieldResponse.value === null || fieldResponse.value === '' ? 'No response' : 
-               Array.isArray(fieldResponse.value) ? fieldResponse.value.join(', ') : 
-               String(fieldResponse.value)}
+              {fieldResponse.value === null || fieldResponse.value === ""
+                ? "No response"
+                : Array.isArray(fieldResponse.value)
+                ? fieldResponse.value.join(", ")
+                : String(fieldResponse.value)}
             </p>
           </div>
         ))}
@@ -130,7 +139,8 @@ const FormView = ({ showResponses }) => {
           {form.fields?.map((field, index) => (
             <div key={index} className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
-                {field.label} {field.required && <span className="text-red-500">*</span>}
+                {field.label}{" "}
+                {field.required && <span className="text-red-500">*</span>}
               </label>
               {renderField(field)}
             </div>
