@@ -218,7 +218,7 @@ const FormBuilder = () => {
             <input
               type="file"
               onChange={handleFileChange}
-              accept="image/*,.pdf,.txt,.doc,.docx,.rtf"
+              accept="image/*,.pdf,.doc,.docx,.txt,.rtf"
               className="w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 
                        file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 
                        hover:file:bg-blue-100 transition-all"

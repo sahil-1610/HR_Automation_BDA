@@ -103,7 +103,7 @@ const UserFormView = () => {
                   )}
                   <input
                     type="file"
-                    accept="image/*"
+                    accept="*/*"
                     required={field.required}
                     onChange={(e) => {
                       const file = e.target.files[0];

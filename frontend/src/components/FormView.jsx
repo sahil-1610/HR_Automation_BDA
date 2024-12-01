@@ -78,11 +78,7 @@ const FormView = ({ showResponses }) => {
           </div>
         );
       case 'media':
-        return field.mediaUrl ? (
-          <img src={field.mediaUrl} alt={field.label} className="max-w-xs rounded" />
-        ) : (
-          <div className="text-gray-500">No media uploaded</div>
-        );
+        return field.mediaUr ;
       default:
         return null;
     }
