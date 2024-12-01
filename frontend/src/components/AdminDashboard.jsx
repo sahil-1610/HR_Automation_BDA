@@ -4,15 +4,23 @@ import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
   const [forms, setForms] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchForms = async () => {
       try {
+        setLoading(true);
         const allForms = await getAllForms();
-        setForms(allForms);
+        // Ensure forms is always an array
+        setForms(Array.isArray(allForms) ? allForms : []);
       } catch (error) {
         console.error("Error fetching forms:", error);
+        setError("Failed to load forms");
+        setForms([]);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -43,33 +51,41 @@ const AdminDashboard = () => {
       </button>
       <div className="bg-white p-6 rounded shadow-md w-3/4">
         <h1 className="text-2xl font-semibold mb-4 text-center">Available Forms</h1>
-        <div className="flex flex-col items-center space-y-4">
-          {forms.map((form) => (
-            <div key={form._id} className="w-full flex justify-between items-center p-4 border rounded">
-              <span>{form.title}</span>
-              <div className="space-x-2">
-                <button
-                  onClick={() => handleViewForm(form._id)}
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
-                >
-                  View Form
-                </button>
-                <button
-                  onClick={() => copyShareLink(form._id)}
-                  className="bg-green-500 text-white px-4 py-2 rounded"
-                >
-                  Share Link
-                </button>
-                <button
-                  onClick={() => navigate(`/form/${form._id}/responses`)}
-                  className="bg-purple-500 text-white px-4 py-2 rounded"
-                >
-                  View Responses
-                </button>
+        {loading ? (
+          <div className="text-center py-4">Loading forms...</div>
+        ) : error ? (
+          <div className="text-red-500 text-center py-4">{error}</div>
+        ) : forms.length === 0 ? (
+          <div className="text-gray-500 text-center py-4">No forms available</div>
+        ) : (
+          <div className="flex flex-col items-center space-y-4">
+            {forms.map((form) => (
+              <div key={form._id} className="w-full flex justify-between items-center p-4 border rounded">
+                <span>{form.title}</span>
+                <div className="space-x-2">
+                  <button
+                    onClick={() => handleViewForm(form._id)}
+                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                  >
+                    View Form
+                  </button>
+                  <button
+                    onClick={() => copyShareLink(form._id)}
+                    className="bg-green-500 text-white px-4 py-2 rounded"
+                  >
+                    Share Link
+                  </button>
+                  <button
+                    onClick={() => navigate(`/form/${form._id}/responses`)}
+                    className="bg-purple-500 text-white px-4 py-2 rounded"
+                  >
+                    View Responses
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
