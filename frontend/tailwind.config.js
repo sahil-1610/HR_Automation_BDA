@@ -9,6 +9,7 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
      "./node_modules/@material-tailwind/react/**/*.{js,ts,jsx,tsx}"
   ],
+  darkMode: 'class', // Enable dark mode with class strategy
   theme: {
     extend: {},
   },

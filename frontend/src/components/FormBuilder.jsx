@@ -153,50 +153,63 @@ const FormBuilder = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-8">
-        <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-8">Create Custom Form</h2>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+      <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 sm:p-8">
+        <h2 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 text-center mb-8">Create Custom Form</h2>
         <input
           type="text"
           value={formTitle}
           onChange={(e) => setFormTitle(e.target.value)}
           placeholder="Form Title"
-          className="mb-6 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+          className="mb-6 w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300"
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <select
             value={fieldType}
             onChange={(e) => setFieldType(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 
+              bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 
+              rounded-lg focus:ring-2 focus:ring-blue-500 
+              transition-colors duration-300"
           >
-            <option value="text">Text</option>
-            <option value="number">Number</option>
-            <option value="phone">Phone</option>
-            <option value="email">Email</option>
-            <option value="date">Date</option>
-            <option value="media">File Upload</option>
-            <option value="checkbox">Checkbox</option>
-            <option value="radio">Radio</option>
-            <option value="select">Select</option>
+            <option value="text" className="bg-white dark:bg-gray-700">Text</option>
+            <option value="number" className="bg-white dark:bg-gray-700">Number</option>
+            <option value="phone" className="bg-white dark:bg-gray-700">Phone</option>
+            <option value="email" className="bg-white dark:bg-gray-700">Email</option>
+            <option value="date" className="bg-white dark:bg-gray-700">Date</option>
+            <option value="media" className="bg-white dark:bg-gray-700">File Upload</option>
+            <option value="checkbox" className="bg-white dark:bg-gray-700">Checkbox</option>
+            <option value="radio" className="bg-white dark:bg-gray-700">Radio</option>
+            <option value="select" className="bg-white dark:bg-gray-700">Select</option>
           </select>
           <input
             type="text"
             value={label}
             onChange={(e) => setLabel(e.target.value)}
             placeholder="Field Label"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 
+              bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 
+              rounded-lg focus:ring-2 focus:ring-blue-500 
+              transition-colors duration-300"
           />
           <input
             type="text"
             value={placeholder}
             onChange={(e) => setPlaceholder(e.target.value)}
             placeholder="Placeholder text"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 
+              bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 
+              rounded-lg focus:ring-2 focus:ring-blue-500 
+              transition-colors duration-300"
           />
           <button
             onClick={addField}
-            className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+            className="w-full px-6 py-3 bg-blue-600 dark:bg-blue-500 
+              text-white rounded-lg hover:bg-blue-700 
+              dark:hover:bg-blue-600 focus:ring-2 
+              focus:ring-offset-2 focus:ring-blue-500 
+              transition-colors duration-300"
           >
             Add Field
           </button>
@@ -228,8 +241,8 @@ const FormBuilder = () => {
         )}
 
         {/* Preview section with enhanced styling */}
-        <div className="mt-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
-          <h3 className="text-xl font-semibold mb-4 text-gray-900">Form Preview</h3>
+        <div className="mt-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+          <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Form Preview</h3>
           <div className="space-y-4">
             {formFields.map((field) => (
               <div key={field.id} className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
@@ -245,8 +258,8 @@ const FormBuilder = () => {
           disabled={isLoading}
           className={`w-full mt-8 py-3 px-6 rounded-lg text-white font-medium transition-all
             ${isLoading 
-              ? 'bg-gray-400 cursor-not-allowed' 
-              : 'bg-green-600 hover:bg-green-700 focus:ring-2 focus:ring-offset-2 focus:ring-green-500'
+              ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed' 
+              : 'bg-green-600 dark:bg-green-500 hover:bg-green-700 dark:hover:bg-green-600'
             }`}
         >
           {isLoading ? 'Saving...' : 'Save Form'}
