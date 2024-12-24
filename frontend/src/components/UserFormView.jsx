@@ -112,12 +112,14 @@ const UserFormView = () => {
               {(field.type === "text" ||
                 field.type === "email" ||
                 field.type === "number" ||
-                field.type === "phone") && (
+                field.type === "phone" ||
+                field.type === "date") && (  // Added date here
                 <input
                   type={field.type === "phone" ? "tel" : field.type}
                   required={field.required}
                   placeholder={field.placeholder}
                   pattern={field.type === "phone" ? "[0-9]{10}" : undefined}
+                  value={responses[field._id] || ""}  // Add this line
                   onChange={(e) =>
                     setResponses({ ...responses, [field._id]: e.target.value })
                   }

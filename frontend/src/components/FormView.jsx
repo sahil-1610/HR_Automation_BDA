@@ -42,7 +42,8 @@ const FormView = ({ showResponses }) => {
         return (
           <input
             type="date"
-            className="shadow border rounded w-full py-2 px-3"
+            className="shadow border rounded w-full py-2 px-3 text-gray-700"
+            defaultValue={new Date().toISOString().split('T')[0]}
             disabled
           />
         );
